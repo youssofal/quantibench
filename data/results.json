@@ -1,0 +1,922 @@
+[
+  {
+    "slug": "llama-3.1-8b",
+    "name": "Llama 3.1 8B Instruct",
+    "params": "8B",
+    "huggingface": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+    "quants": [
+      {
+        "quant": "FP16",
+        "fileSizeGb": 15.78,
+        "vramGb": 18.59,
+        "decodeToksPerSec": 28.7,
+        "prefillToksPerSec": 1171.6,
+        "scores": {
+          "ifeval": 72,
+          "bbh": 67,
+          "gpqa": 31,
+          "musr": 40,
+          "hle": 5
+        },
+        "retention": 100,
+        "retentionPerBenchmark": {
+          "ifeval": 100,
+          "bbh": 100,
+          "gpqa": 100,
+          "musr": 100,
+          "hle": 100
+        }
+      },
+      {
+        "quant": "Q8_0",
+        "fileSizeGb": 8.45,
+        "vramGb": 9.69,
+        "decodeToksPerSec": 40.4,
+        "prefillToksPerSec": 1747.3,
+        "scores": {
+          "ifeval": 71,
+          "bbh": 65.9,
+          "gpqa": 30.8,
+          "musr": 39.5,
+          "hle": 4.9
+        },
+        "retention": 98.8,
+        "retentionPerBenchmark": {
+          "ifeval": 98.6,
+          "bbh": 98.3,
+          "gpqa": 99.5,
+          "musr": 98.8,
+          "hle": 98.8
+        }
+      },
+      {
+        "quant": "Q6_K",
+        "fileSizeGb": 6.5,
+        "vramGb": 7.71,
+        "decodeToksPerSec": 46.4,
+        "prefillToksPerSec": 2048.2,
+        "scores": {
+          "ifeval": 69.8,
+          "bbh": 64.6,
+          "gpqa": 29.9,
+          "musr": 38.6,
+          "hle": 4.8
+        },
+        "retention": 96.6,
+        "retentionPerBenchmark": {
+          "ifeval": 96.9,
+          "bbh": 96.5,
+          "gpqa": 96.5,
+          "musr": 96.4,
+          "hle": 96.6
+        }
+      },
+      {
+        "quant": "Q5_K_M",
+        "fileSizeGb": 5.79,
+        "vramGb": 6.68,
+        "decodeToksPerSec": 51.5,
+        "prefillToksPerSec": 2160.8,
+        "scores": {
+          "ifeval": 69.3,
+          "bbh": 63.1,
+          "gpqa": 29.6,
+          "musr": 37.8,
+          "hle": 4.8
+        },
+        "retention": 95.4,
+        "retentionPerBenchmark": {
+          "ifeval": 96.2,
+          "bbh": 94.2,
+          "gpqa": 95.6,
+          "musr": 94.4,
+          "hle": 96.6
+        }
+      },
+      {
+        "quant": "Q4_K_M",
+        "fileSizeGb": 4.84,
+        "vramGb": 5.63,
+        "decodeToksPerSec": 59.5,
+        "prefillToksPerSec": 2480.7,
+        "scores": {
+          "ifeval": 65.6,
+          "bbh": 61,
+          "gpqa": 29.4,
+          "musr": 37.9,
+          "hle": 4.7
+        },
+        "retention": 93.2,
+        "retentionPerBenchmark": {
+          "ifeval": 91,
+          "bbh": 91.1,
+          "gpqa": 95,
+          "musr": 94.7,
+          "hle": 94.1
+        }
+      },
+      {
+        "quant": "Q3_K_M",
+        "fileSizeGb": 3.79,
+        "vramGb": 4.46,
+        "decodeToksPerSec": 64.9,
+        "prefillToksPerSec": 2866.7,
+        "scores": {
+          "ifeval": 62.6,
+          "bbh": 57.8,
+          "gpqa": 26.9,
+          "musr": 35.3,
+          "hle": 4.3
+        },
+        "retention": 87,
+        "retentionPerBenchmark": {
+          "ifeval": 86.9,
+          "bbh": 86.3,
+          "gpqa": 86.8,
+          "musr": 88.2,
+          "hle": 86.8
+        }
+      },
+      {
+        "quant": "IQ2_XXS",
+        "fileSizeGb": 2.69,
+        "vramGb": 3.22,
+        "decodeToksPerSec": 77.9,
+        "prefillToksPerSec": 3427.7,
+        "scores": {
+          "ifeval": 54.7,
+          "bbh": 50.1,
+          "gpqa": 22.8,
+          "musr": 32.8,
+          "hle": 3.9
+        },
+        "retention": 76.8,
+        "retentionPerBenchmark": {
+          "ifeval": 76,
+          "bbh": 74.7,
+          "gpqa": 73.6,
+          "musr": 81.9,
+          "hle": 77.9
+        }
+      },
+      {
+        "quant": "IQ1_S",
+        "fileSizeGb": 2.08,
+        "vramGb": 2.41,
+        "decodeToksPerSec": 91.8,
+        "prefillToksPerSec": 3716.4,
+        "scores": {
+          "ifeval": 43.4,
+          "bbh": 43.2,
+          "gpqa": 21.7,
+          "musr": 24.1,
+          "hle": 3.3
+        },
+        "retention": 64.2,
+        "retentionPerBenchmark": {
+          "ifeval": 60.2,
+          "bbh": 64.5,
+          "gpqa": 69.9,
+          "musr": 60.3,
+          "hle": 66.2
+        }
+      }
+    ]
+  },
+  {
+    "slug": "qwen-2.5-7b",
+    "name": "Qwen 2.5 7B Instruct",
+    "params": "7B",
+    "huggingface": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+    "quants": [
+      {
+        "quant": "FP16",
+        "fileSizeGb": 14.38,
+        "vramGb": 16.73,
+        "decodeToksPerSec": 30.7,
+        "prefillToksPerSec": 1286.5,
+        "scores": {
+          "ifeval": 75,
+          "bbh": 65,
+          "gpqa": 33,
+          "musr": 38,
+          "hle": 7
+        },
+        "retention": 100,
+        "retentionPerBenchmark": {
+          "ifeval": 100,
+          "bbh": 100,
+          "gpqa": 100,
+          "musr": 100,
+          "hle": 100
+        }
+      },
+      {
+        "quant": "Q8_0",
+        "fileSizeGb": 7.53,
+        "vramGb": 8.62,
+        "decodeToksPerSec": 47,
+        "prefillToksPerSec": 1861.4,
+        "scores": {
+          "ifeval": 73.7,
+          "bbh": 64.3,
+          "gpqa": 32.5,
+          "musr": 37.4,
+          "hle": 6.9
+        },
+        "retention": 98.6,
+        "retentionPerBenchmark": {
+          "ifeval": 98.2,
+          "bbh": 99,
+          "gpqa": 98.6,
+          "musr": 98.4,
+          "hle": 98.8
+        }
+      },
+      {
+        "quant": "Q6_K",
+        "fileSizeGb": 5.81,
+        "vramGb": 6.89,
+        "decodeToksPerSec": 52.6,
+        "prefillToksPerSec": 2333.8,
+        "scores": {
+          "ifeval": 73.2,
+          "bbh": 62.7,
+          "gpqa": 32.1,
+          "musr": 37.2,
+          "hle": 6.8
+        },
+        "retention": 97.2,
+        "retentionPerBenchmark": {
+          "ifeval": 97.5,
+          "bbh": 96.5,
+          "gpqa": 97.3,
+          "musr": 97.8,
+          "hle": 96.9
+        }
+      },
+      {
+        "quant": "Q5_K_M",
+        "fileSizeGb": 5.18,
+        "vramGb": 5.96,
+        "decodeToksPerSec": 58.1,
+        "prefillToksPerSec": 2458.4,
+        "scores": {
+          "ifeval": 71.2,
+          "bbh": 62.6,
+          "gpqa": 31.9,
+          "musr": 36.6,
+          "hle": 6.7
+        },
+        "retention": 96,
+        "retentionPerBenchmark": {
+          "ifeval": 95,
+          "bbh": 96.4,
+          "gpqa": 96.6,
+          "musr": 96.2,
+          "hle": 95.7
+        }
+      },
+      {
+        "quant": "Q4_K_M",
+        "fileSizeGb": 4.26,
+        "vramGb": 4.95,
+        "decodeToksPerSec": 63.9,
+        "prefillToksPerSec": 2892,
+        "scores": {
+          "ifeval": 69.2,
+          "bbh": 60.3,
+          "gpqa": 30.8,
+          "musr": 35.6,
+          "hle": 6.4
+        },
+        "retention": 92.6,
+        "retentionPerBenchmark": {
+          "ifeval": 92.2,
+          "bbh": 92.8,
+          "gpqa": 93.3,
+          "musr": 93.6,
+          "hle": 91.3
+        }
+      },
+      {
+        "quant": "Q3_K_M",
+        "fileSizeGb": 3.38,
+        "vramGb": 3.95,
+        "decodeToksPerSec": 74.8,
+        "prefillToksPerSec": 3196.5,
+        "scores": {
+          "ifeval": 65.2,
+          "bbh": 56.7,
+          "gpqa": 29.6,
+          "musr": 32.5,
+          "hle": 6.1
+        },
+        "retention": 87.3,
+        "retentionPerBenchmark": {
+          "ifeval": 86.9,
+          "bbh": 87.2,
+          "gpqa": 89.7,
+          "musr": 85.6,
+          "hle": 87.1
+        }
+      },
+      {
+        "quant": "IQ2_XXS",
+        "fileSizeGb": 2.42,
+        "vramGb": 2.77,
+        "decodeToksPerSec": 88.7,
+        "prefillToksPerSec": 3639.7,
+        "scores": {
+          "ifeval": 59.5,
+          "bbh": 52.9,
+          "gpqa": 24.1,
+          "musr": 29.4,
+          "hle": 5.6
+        },
+        "retention": 78.3,
+        "retentionPerBenchmark": {
+          "ifeval": 79.4,
+          "bbh": 81.4,
+          "gpqa": 73.2,
+          "musr": 77.3,
+          "hle": 80.4
+        }
+      },
+      {
+        "quant": "IQ1_S",
+        "fileSizeGb": 1.83,
+        "vramGb": 2.14,
+        "decodeToksPerSec": 100.5,
+        "prefillToksPerSec": 4370.3,
+        "scores": {
+          "ifeval": 50.8,
+          "bbh": 40.8,
+          "gpqa": 19.4,
+          "musr": 24.8,
+          "hle": 4.3
+        },
+        "retention": 63.3,
+        "retentionPerBenchmark": {
+          "ifeval": 67.7,
+          "bbh": 62.7,
+          "gpqa": 58.9,
+          "musr": 65.2,
+          "hle": 62
+        }
+      }
+    ]
+  },
+  {
+    "slug": "mistral-7b-v0.3",
+    "name": "Mistral 7B v0.3 Instruct",
+    "params": "7B",
+    "huggingface": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3",
+    "quants": [
+      {
+        "quant": "FP16",
+        "fileSizeGb": 14.33,
+        "vramGb": 16.7,
+        "decodeToksPerSec": 31.5,
+        "prefillToksPerSec": 1241.1,
+        "scores": {
+          "ifeval": 60,
+          "bbh": 58,
+          "gpqa": 28,
+          "musr": 35,
+          "hle": 3
+        },
+        "retention": 100,
+        "retentionPerBenchmark": {
+          "ifeval": 100,
+          "bbh": 100,
+          "gpqa": 100,
+          "musr": 100,
+          "hle": 100
+        }
+      },
+      {
+        "quant": "Q8_0",
+        "fileSizeGb": 7.6,
+        "vramGb": 8.86,
+        "decodeToksPerSec": 40.6,
+        "prefillToksPerSec": 1873.8,
+        "scores": {
+          "ifeval": 59.4,
+          "bbh": 57.3,
+          "gpqa": 27.8,
+          "musr": 34.4,
+          "hle": 3
+        },
+        "retention": 98.7,
+        "retentionPerBenchmark": {
+          "ifeval": 99,
+          "bbh": 98.8,
+          "gpqa": 99.2,
+          "musr": 98.2,
+          "hle": 98.5
+        }
+      },
+      {
+        "quant": "Q6_K",
+        "fileSizeGb": 5.9,
+        "vramGb": 6.88,
+        "decodeToksPerSec": 49,
+        "prefillToksPerSec": 2097.1,
+        "scores": {
+          "ifeval": 58.5,
+          "bbh": 56.4,
+          "gpqa": 27.2,
+          "musr": 33.9,
+          "hle": 2.9
+        },
+        "retention": 97.1,
+        "retentionPerBenchmark": {
+          "ifeval": 97.5,
+          "bbh": 97.2,
+          "gpqa": 97,
+          "musr": 97,
+          "hle": 96.7
+        }
+      },
+      {
+        "quant": "Q5_K_M",
+        "fileSizeGb": 5.12,
+        "vramGb": 6.03,
+        "decodeToksPerSec": 55.7,
+        "prefillToksPerSec": 2295,
+        "scores": {
+          "ifeval": 57,
+          "bbh": 55.1,
+          "gpqa": 26.4,
+          "musr": 33.7,
+          "hle": 2.9
+        },
+        "retention": 95.2,
+        "retentionPerBenchmark": {
+          "ifeval": 95,
+          "bbh": 95.1,
+          "gpqa": 94.3,
+          "musr": 96.2,
+          "hle": 95.2
+        }
+      },
+      {
+        "quant": "Q4_K_M",
+        "fileSizeGb": 4.35,
+        "vramGb": 4.99,
+        "decodeToksPerSec": 65.3,
+        "prefillToksPerSec": 2772,
+        "scores": {
+          "ifeval": 56.7,
+          "bbh": 54.9,
+          "gpqa": 26.6,
+          "musr": 33,
+          "hle": 2.8
+        },
+        "retention": 94,
+        "retentionPerBenchmark": {
+          "ifeval": 94.5,
+          "bbh": 94.7,
+          "gpqa": 94.9,
+          "musr": 94.2,
+          "hle": 91.9
+        }
+      },
+      {
+        "quant": "Q3_K_M",
+        "fileSizeGb": 3.43,
+        "vramGb": 4.07,
+        "decodeToksPerSec": 75.6,
+        "prefillToksPerSec": 3218.1,
+        "scores": {
+          "ifeval": 54,
+          "bbh": 50.3,
+          "gpqa": 24.7,
+          "musr": 30.9,
+          "hle": 2.7
+        },
+        "retention": 88.5,
+        "retentionPerBenchmark": {
+          "ifeval": 89.9,
+          "bbh": 86.7,
+          "gpqa": 88.1,
+          "musr": 88.4,
+          "hle": 89.5
+        }
+      },
+      {
+        "quant": "IQ2_XXS",
+        "fileSizeGb": 2.47,
+        "vramGb": 2.82,
+        "decodeToksPerSec": 86.5,
+        "prefillToksPerSec": 3494.5,
+        "scores": {
+          "ifeval": 44.5,
+          "bbh": 44.3,
+          "gpqa": 20.5,
+          "musr": 27.3,
+          "hle": 2.2
+        },
+        "retention": 75.3,
+        "retentionPerBenchmark": {
+          "ifeval": 74.2,
+          "bbh": 76.3,
+          "gpqa": 73.4,
+          "musr": 77.9,
+          "hle": 74.6
+        }
+      },
+      {
+        "quant": "IQ1_S",
+        "fileSizeGb": 1.89,
+        "vramGb": 2.19,
+        "decodeToksPerSec": 97.3,
+        "prefillToksPerSec": 4275.1,
+        "scores": {
+          "ifeval": 36.4,
+          "bbh": 36,
+          "gpqa": 18.7,
+          "musr": 22,
+          "hle": 2.1
+        },
+        "retention": 64.4,
+        "retentionPerBenchmark": {
+          "ifeval": 60.6,
+          "bbh": 62.1,
+          "gpqa": 66.9,
+          "musr": 63,
+          "hle": 69.5
+        }
+      }
+    ]
+  },
+  {
+    "slug": "gemma-2-9b",
+    "name": "Gemma 2 9B Instruct",
+    "params": "9B",
+    "huggingface": "https://huggingface.co/google/gemma-2-9b-it",
+    "quants": [
+      {
+        "quant": "FP16",
+        "fileSizeGb": 18.49,
+        "vramGb": 21.35,
+        "decodeToksPerSec": 24,
+        "prefillToksPerSec": 1127.9,
+        "scores": {
+          "ifeval": 71,
+          "bbh": 72,
+          "gpqa": 35,
+          "musr": 43,
+          "hle": 6
+        },
+        "retention": 100,
+        "retentionPerBenchmark": {
+          "ifeval": 100,
+          "bbh": 100,
+          "gpqa": 100,
+          "musr": 100,
+          "hle": 100
+        }
+      },
+      {
+        "quant": "Q8_0",
+        "fileSizeGb": 9.7,
+        "vramGb": 11.48,
+        "decodeToksPerSec": 34.9,
+        "prefillToksPerSec": 1563,
+        "scores": {
+          "ifeval": 69.7,
+          "bbh": 71.2,
+          "gpqa": 34.6,
+          "musr": 42.4,
+          "hle": 5.9
+        },
+        "retention": 98.6,
+        "retentionPerBenchmark": {
+          "ifeval": 98.2,
+          "bbh": 98.9,
+          "gpqa": 98.9,
+          "musr": 98.5,
+          "hle": 98.6
+        }
+      },
+      {
+        "quant": "Q6_K",
+        "fileSizeGb": 7.68,
+        "vramGb": 8.67,
+        "decodeToksPerSec": 39.4,
+        "prefillToksPerSec": 1807.7,
+        "scores": {
+          "ifeval": 68.9,
+          "bbh": 69.2,
+          "gpqa": 34,
+          "musr": 41.9,
+          "hle": 5.8
+        },
+        "retention": 96.8,
+        "retentionPerBenchmark": {
+          "ifeval": 97,
+          "bbh": 96.1,
+          "gpqa": 97.3,
+          "musr": 97.3,
+          "hle": 96.3
+        }
+      },
+      {
+        "quant": "Q5_K_M",
+        "fileSizeGb": 6.63,
+        "vramGb": 7.7,
+        "decodeToksPerSec": 45.6,
+        "prefillToksPerSec": 2010.7,
+        "scores": {
+          "ifeval": 68.3,
+          "bbh": 69.8,
+          "gpqa": 33.5,
+          "musr": 40.5,
+          "hle": 5.8
+        },
+        "retention": 95.7,
+        "retentionPerBenchmark": {
+          "ifeval": 96.2,
+          "bbh": 96.9,
+          "gpqa": 95.6,
+          "musr": 94.1,
+          "hle": 95.9
+        }
+      },
+      {
+        "quant": "Q4_K_M",
+        "fileSizeGb": 5.6,
+        "vramGb": 6.35,
+        "decodeToksPerSec": 53.1,
+        "prefillToksPerSec": 2199.9,
+        "scores": {
+          "ifeval": 67,
+          "bbh": 68,
+          "gpqa": 33.1,
+          "musr": 40.1,
+          "hle": 5.5
+        },
+        "retention": 93.6,
+        "retentionPerBenchmark": {
+          "ifeval": 94.4,
+          "bbh": 94.4,
+          "gpqa": 94.7,
+          "musr": 93.2,
+          "hle": 91.2
+        }
+      },
+      {
+        "quant": "Q3_K_M",
+        "fileSizeGb": 4.52,
+        "vramGb": 5.12,
+        "decodeToksPerSec": 59.9,
+        "prefillToksPerSec": 2742.1,
+        "scores": {
+          "ifeval": 62,
+          "bbh": 63.5,
+          "gpqa": 31.3,
+          "musr": 37.3,
+          "hle": 5.4
+        },
+        "retention": 88.2,
+        "retentionPerBenchmark": {
+          "ifeval": 87.3,
+          "bbh": 88.2,
+          "gpqa": 89.4,
+          "musr": 86.7,
+          "hle": 89.4
+        }
+      },
+      {
+        "quant": "IQ2_XXS",
+        "fileSizeGb": 3.15,
+        "vramGb": 3.66,
+        "decodeToksPerSec": 70.6,
+        "prefillToksPerSec": 3117.3,
+        "scores": {
+          "ifeval": 52,
+          "bbh": 52.8,
+          "gpqa": 27.1,
+          "musr": 33.5,
+          "hle": 4.6
+        },
+        "retention": 75.7,
+        "retentionPerBenchmark": {
+          "ifeval": 73.2,
+          "bbh": 73.3,
+          "gpqa": 77.3,
+          "musr": 77.9,
+          "hle": 76.6
+        }
+      },
+      {
+        "quant": "IQ1_S",
+        "fileSizeGb": 2.37,
+        "vramGb": 2.77,
+        "decodeToksPerSec": 83.9,
+        "prefillToksPerSec": 3685.1,
+        "scores": {
+          "ifeval": 42.3,
+          "bbh": 48.5,
+          "gpqa": 23.7,
+          "musr": 30,
+          "hle": 3.8
+        },
+        "retention": 65.5,
+        "retentionPerBenchmark": {
+          "ifeval": 59.6,
+          "bbh": 67.3,
+          "gpqa": 67.7,
+          "musr": 69.7,
+          "hle": 63.2
+        }
+      }
+    ]
+  },
+  {
+    "slug": "phi-4",
+    "name": "Phi-4",
+    "params": "14B",
+    "huggingface": "https://huggingface.co/microsoft/phi-4",
+    "quants": [
+      {
+        "quant": "FP16",
+        "fileSizeGb": 27.89,
+        "vramGb": 31.64,
+        "decodeToksPerSec": 18.9,
+        "prefillToksPerSec": 875.2,
+        "scores": {
+          "ifeval": 78,
+          "bbh": 78,
+          "gpqa": 42,
+          "musr": 48,
+          "hle": 10
+        },
+        "retention": 100,
+        "retentionPerBenchmark": {
+          "ifeval": 100,
+          "bbh": 100,
+          "gpqa": 100,
+          "musr": 100,
+          "hle": 100
+        }
+      },
+      {
+        "quant": "Q8_0",
+        "fileSizeGb": 15.09,
+        "vramGb": 17.05,
+        "decodeToksPerSec": 26.1,
+        "prefillToksPerSec": 1147.9,
+        "scores": {
+          "ifeval": 76.9,
+          "bbh": 76.8,
+          "gpqa": 41.2,
+          "musr": 47.7,
+          "hle": 9.9
+        },
+        "retention": 98.7,
+        "retentionPerBenchmark": {
+          "ifeval": 98.6,
+          "bbh": 98.5,
+          "gpqa": 98.1,
+          "musr": 99.4,
+          "hle": 98.9
+        }
+      },
+      {
+        "quant": "Q6_K",
+        "fileSizeGb": 11.59,
+        "vramGb": 13.18,
+        "decodeToksPerSec": 28.9,
+        "prefillToksPerSec": 1392.5,
+        "scores": {
+          "ifeval": 75.6,
+          "bbh": 75,
+          "gpqa": 40.6,
+          "musr": 46.3,
+          "hle": 9.7
+        },
+        "retention": 96.6,
+        "retentionPerBenchmark": {
+          "ifeval": 97,
+          "bbh": 96.1,
+          "gpqa": 96.6,
+          "musr": 96.5,
+          "hle": 96.9
+        }
+      },
+      {
+        "quant": "Q5_K_M",
+        "fileSizeGb": 9.99,
+        "vramGb": 11.34,
+        "decodeToksPerSec": 33.8,
+        "prefillToksPerSec": 1530.4,
+        "scores": {
+          "ifeval": 75.2,
+          "bbh": 74.8,
+          "gpqa": 40.1,
+          "musr": 46.3,
+          "hle": 9.6
+        },
+        "retention": 96.1,
+        "retentionPerBenchmark": {
+          "ifeval": 96.4,
+          "bbh": 95.9,
+          "gpqa": 95.5,
+          "musr": 96.4,
+          "hle": 96.4
+        }
+      },
+      {
+        "quant": "Q4_K_M",
+        "fileSizeGb": 8.36,
+        "vramGb": 9.41,
+        "decodeToksPerSec": 37.9,
+        "prefillToksPerSec": 1765.1,
+        "scores": {
+          "ifeval": 72.2,
+          "bbh": 71.7,
+          "gpqa": 39.3,
+          "musr": 43.9,
+          "hle": 9.3
+        },
+        "retention": 92.6,
+        "retentionPerBenchmark": {
+          "ifeval": 92.5,
+          "bbh": 92,
+          "gpqa": 93.5,
+          "musr": 91.5,
+          "hle": 93.4
+        }
+      },
+      {
+        "quant": "Q3_K_M",
+        "fileSizeGb": 6.77,
+        "vramGb": 7.75,
+        "decodeToksPerSec": 43.3,
+        "prefillToksPerSec": 1939.6,
+        "scores": {
+          "ifeval": 67.8,
+          "bbh": 69.9,
+          "gpqa": 35.8,
+          "musr": 41,
+          "hle": 8.6
+        },
+        "retention": 86.7,
+        "retentionPerBenchmark": {
+          "ifeval": 87,
+          "bbh": 89.7,
+          "gpqa": 85.1,
+          "musr": 85.5,
+          "hle": 86.3
+        }
+      },
+      {
+        "quant": "IQ2_XXS",
+        "fileSizeGb": 4.67,
+        "vramGb": 5.37,
+        "decodeToksPerSec": 51.3,
+        "prefillToksPerSec": 2308.4,
+        "scores": {
+          "ifeval": 62.5,
+          "bbh": 59.6,
+          "gpqa": 31.1,
+          "musr": 35.7,
+          "hle": 7.6
+        },
+        "retention": 76.3,
+        "retentionPerBenchmark": {
+          "ifeval": 80.1,
+          "bbh": 76.5,
+          "gpqa": 74.2,
+          "musr": 74.4,
+          "hle": 76.5
+        }
+      },
+      {
+        "quant": "IQ1_S",
+        "fileSizeGb": 3.65,
+        "vramGb": 4.14,
+        "decodeToksPerSec": 59.1,
+        "prefillToksPerSec": 2852.6,
+        "scores": {
+          "ifeval": 45.7,
+          "bbh": 51.8,
+          "gpqa": 28.2,
+          "musr": 28.4,
+          "hle": 6.8
+        },
+        "retention": 63.9,
+        "retentionPerBenchmark": {
+          "ifeval": 58.6,
+          "bbh": 66.4,
+          "gpqa": 67.1,
+          "musr": 59.1,
+          "hle": 68.5
+        }
+      }
+    ]
+  }
+]

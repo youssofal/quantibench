@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  /* Backgrounds */
+  --bg-primary: #09090B;
+  --bg-card: #18181B;
+  --bg-elevated: #27272A;
+
+  /* Text */
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+
+  /* Borders */
+  --border: #3F3F46;
+
+  /* Quant Colors */
+  --q-fp16: #C8C8C8;
+  --q-q8: #60A5FA;
+  --q-q6: #2DD4BF;
+  --q-q5: #A3E635;
+  --q-q4: #FBBF24;
+  --q-q3: #FB923C;
+  --q-iq2: #F87171;
+  --q-iq1: #EF4444;
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-q-fp16: var(--q-fp16);
+  --color-q-q8: var(--q-q8);
+  --color-q-q6: var(--q-q6);
+  --color-q-q5: var(--q-q5);
+  --color-q-q4: var(--q-q4);
+  --color-q-q3: var(--q-q3);
+  --color-q-iq2: var(--q-iq2);
+  --color-q-iq1: var(--q-iq1);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(63, 63, 70, 0.4);
+  border-radius: 12px;
+}
+
+/* Glass morphism card — elevated variant */
+.glass-card-elevated {
+  background: rgba(39, 39, 42, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(63, 63, 70, 0.5);
+  border-radius: 12px;
+}
+
+/* Metallic text gradient (for hero heading) */
+.text-metallic {
+  background: linear-gradient(180deg, #FAFAFA 0%, #A1A1AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle hover glow for interactive elements */
+.hover-glow {
+  transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(250, 250, 250, 0.05);
+  border-color: rgba(63, 63, 70, 0.7);
+}
+
+/* Button press feedback */
+.press-scale {
+  transition: transform 0.1s ease-out;
+}
+
+.press-scale:active {
+  transform: scale(0.98);
+}
+
+/* Chart tooltip */
+.chart-tooltip {
+  background: rgba(24, 24, 27, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(63, 63, 70, 0.6);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  pointer-events: none;
+  position: absolute;
+  z-index: 50;
+  white-space: nowrap;
+}
