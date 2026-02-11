@@ -45,14 +45,15 @@ export default function HomePage() {
     <div className="mx-auto max-w-7xl px-6">
       {/* Hero Section */}
       <SectionReveal>
-        <section className="py-24 md:py-32 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-metallic mb-6">
+        <section className="py-24 md:py-32 text-center relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent rounded-3xl" />
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-metallic mb-6 relative">
             QuantiBench
           </h1>
-          <p className="text-xl md:text-2xl text-text-secondary mb-6 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-text-secondary mb-6 max-w-2xl mx-auto relative">
             {SITE.tagline}
           </p>
-          <p className="text-base text-text-muted max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base text-text-muted max-w-3xl mx-auto leading-relaxed relative">
             {SITE.description}
           </p>
         </section>
@@ -67,9 +68,14 @@ export default function HomePage() {
           <p className="text-text-muted mb-8">
             How much quality do you keep at each quantization level? Averaged across all models and benchmarks.
           </p>
-          <OverallRetentionBar data={overallRetention} />
+          <div className="glass-card p-8">
+            <OverallRetentionBar data={overallRetention} />
+          </div>
         </section>
       </SectionReveal>
+
+      {/* Divider */}
+      <div className="section-divider" />
 
       {/* Benchmark Breakdown Grid */}
       <SectionReveal>
@@ -84,6 +90,9 @@ export default function HomePage() {
         </section>
       </SectionReveal>
 
+      {/* Divider */}
+      <div className="section-divider" />
+
       {/* Speed vs Quality Scatter */}
       <SectionReveal>
         <section className="py-16">
@@ -93,7 +102,9 @@ export default function HomePage() {
           <p className="text-text-muted mb-8">
             The tradeoff visualized. Each dot is one model at one quantization level. Dot size reflects VRAM usage.
           </p>
-          <SpeedQualityScatter data={scatterData} />
+          <div className="glass-card p-8">
+            <SpeedQualityScatter data={scatterData} />
+          </div>
         </section>
       </SectionReveal>
     </div>
