@@ -3,6 +3,7 @@
 :root {
   /* Backgrounds */
   --bg-primary: #09090B;
+  --bg-section-alt: #0C0C0F;
   --bg-card: #18181B;
   --bg-elevated: #27272A;
 
@@ -29,6 +30,7 @@
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);
   --color-bg-primary: var(--bg-primary);
+  --color-bg-section-alt: var(--bg-section-alt);
   --color-bg-card: var(--bg-card);
   --color-bg-elevated: var(--bg-elevated);
   --color-text-primary: var(--text-primary);
@@ -47,11 +49,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg-primary);
   background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0),
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(63, 63, 70, 0.15) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 50% 100%, rgba(39, 39, 42, 0.2) 0%, transparent 50%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
   color: var(--text-primary);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
@@ -64,14 +72,32 @@ body {
   max-width: 80%;
 }
 
+/* Alternating section background */
+.section-alt {
+  background: var(--bg-section-alt);
+  position: relative;
+}
+
+.section-alt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(63, 63, 70, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 /* Glass morphism card */
 .glass-card {
-  background: rgba(24, 24, 27, 0.7);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(63, 63, 70, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Glass morphism card — elevated variant */
@@ -79,16 +105,38 @@ body {
   background: rgba(39, 39, 42, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(63, 63, 70, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Metallic text gradient (for hero heading) */
+/* Metallic text gradient (for hero heading) — dramatic contrast */
 .text-metallic {
-  background: linear-gradient(180deg, #FAFAFA 0%, #A1A1AA 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #71717A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Section heading with left accent bar */
+.section-heading {
+  position: relative;
+  padding-left: 16px;
+}
+
+.section-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  background: linear-gradient(180deg, var(--q-q8) 0%, var(--q-q4) 100%);
+  border-radius: 2px;
 }
 
 /* Subtle hover glow for interactive elements */
@@ -97,8 +145,10 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(250, 250, 250, 0.05);
-  border-color: rgba(63, 63, 70, 0.7);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(250, 250, 250, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Button press feedback */
@@ -115,7 +165,7 @@ body {
   background: rgba(24, 24, 27, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(63, 63, 70, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 13px;
@@ -124,4 +174,5 @@ body {
   position: absolute;
   z-index: 50;
   white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }

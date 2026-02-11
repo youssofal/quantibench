@@ -22,7 +22,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href ||
               (link.href !== "/" && pathname.startsWith(link.href));
@@ -30,18 +30,16 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`group relative py-1 text-sm font-medium transition-colors ${
-                  isActive ? "text-text-primary" : "text-text-secondary hover:text-text-primary"
+                className={`relative px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
+                  isActive
+                    ? "text-text-primary bg-white/[0.08]"
+                    : "text-text-secondary hover:text-text-primary hover:bg-white/[0.04]"
                 }`}
               >
                 {link.label}
-                <span
-                  className={`absolute bottom-0 left-0 h-px transition-all duration-200 ${
-                    isActive
-                      ? "w-full bg-text-primary"
-                      : "w-0 bg-text-secondary group-hover:w-full"
-                  }`}
-                />
+                {isActive && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-px bg-gradient-to-r from-transparent via-text-primary to-transparent" />
+                )}
               </Link>
             );
           })}

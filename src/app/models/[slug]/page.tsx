@@ -57,7 +57,6 @@ export default async function ModelDetailPage({ params }: PageProps) {
       {/* Breadcrumb + Header */}
       <SectionReveal>
         <section className="py-16 pt-24">
-          {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-text-muted mb-8">
             <Link href="/models" className="hover:text-text-secondary transition-colors">
               Models
@@ -92,36 +91,40 @@ export default async function ModelDetailPage({ params }: PageProps) {
       {/* Retention Curve */}
       <SectionReveal>
         <section className="py-12">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+          <h2 className="section-heading text-2xl font-bold text-text-primary mb-2">
             Quality Retention Curve
           </h2>
-          <p className="text-text-muted mb-6">
+          <p className="text-text-muted mb-6 pl-4">
             How much quality is retained at each quantization level.
           </p>
-          <RetentionCurve data={retentionData} />
+          <div className="glass-card p-6 md:p-8">
+            <RetentionCurve data={retentionData} />
+          </div>
         </section>
       </SectionReveal>
 
       {/* Speed Chart */}
       <SectionReveal>
         <section className="py-12">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+          <h2 className="section-heading text-2xl font-bold text-text-primary mb-2">
             Decode Speed
           </h2>
-          <p className="text-text-muted mb-6">
+          <p className="text-text-muted mb-6 pl-4">
             Tokens per second at each quantization level. Smaller quants are faster.
           </p>
-          <SpeedBar data={speedData} />
+          <div className="glass-card p-6 md:p-8">
+            <SpeedBar data={speedData} />
+          </div>
         </section>
       </SectionReveal>
 
       {/* Data Table */}
       <SectionReveal>
         <section className="py-12">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+          <h2 className="section-heading text-2xl font-bold text-text-primary mb-2">
             Full Benchmark Data
           </h2>
-          <p className="text-text-muted mb-6">
+          <p className="text-text-muted mb-6 pl-4">
             Complete metrics for all quantization levels.
           </p>
           <div className="glass-card p-4 md:p-6">
@@ -133,7 +136,7 @@ export default async function ModelDetailPage({ params }: PageProps) {
       {/* Export */}
       <SectionReveal>
         <section className="py-12">
-          <h2 className="text-2xl font-bold text-text-primary mb-4">
+          <h2 className="section-heading text-2xl font-bold text-text-primary mb-4">
             Export Data
           </h2>
           <ExportButtons modelName={model.name} quants={model.quants} />

@@ -24,6 +24,18 @@ export const QUANT_COLORS: Record<QuantLevel, string> = {
   IQ1_S: "#EF4444",
 };
 
+/** Lighter shade for metallic gradient highlight on chart bars */
+export const QUANT_COLORS_LIGHT: Record<QuantLevel, string> = {
+  FP16: "#E8E8E8",
+  Q8_0: "#93C5FD",
+  Q6_K: "#5EEAD4",
+  Q5_K_M: "#BEF264",
+  Q4_K_M: "#FCD34D",
+  Q3_K_M: "#FDBA74",
+  IQ2_XXS: "#FCA5A5",
+  IQ1_S: "#F87171",
+};
+
 /** Darker shade for metallic gradient effect on chart bars */
 export const QUANT_COLORS_DARK: Record<QuantLevel, string> = {
   FP16: "#8A8A8A",

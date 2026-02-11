@@ -39,18 +39,22 @@ export function RetentionCurve({ data }: RetentionCurveProps) {
     const svg = svgRef.current;
     if (!svg || hasAnimated.current) return;
 
+    const fallback = setTimeout(() => {
+      if (!hasAnimated.current) {
+        setDashOffset(0);
+        setDotScale(1);
+        hasAnimated.current = true;
+      }
+    }, 2000);
+
     async function initGSAP() {
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: svg,
-          start: "top 80%",
-          once: true,
-        },
-        onComplete: () => { hasAnimated.current = true; },
+        scrollTrigger: { trigger: svg, start: "top 90%", once: true },
+        onComplete: () => { hasAnimated.current = true; clearTimeout(fallback); },
       });
 
       const lineProxy = { offset: 1 };
@@ -71,6 +75,8 @@ export function RetentionCurve({ data }: RetentionCurveProps) {
     }
 
     initGSAP();
+
+    return () => clearTimeout(fallback);
   }, []);
 
   const margin = { top: 30, right: 30, bottom: 50, left: 55 };

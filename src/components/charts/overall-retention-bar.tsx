@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { QUANT_COLORS, QUANT_COLORS_DARK, type QuantLevel } from "@/lib/constants";
+import { QUANT_COLORS, QUANT_COLORS_DARK, QUANT_COLORS_LIGHT, type QuantLevel } from "@/lib/constants";
 import { formatPercent } from "@/lib/utils";
 
 interface OverallRetentionBarProps {
@@ -18,24 +18,27 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
-  // Responsive sizing
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
     const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;
       setDimensions({ width, height: Math.min(400, width * 0.5) });
     });
-
     observer.observe(container);
     return () => observer.disconnect();
   }, []);
 
-  // GSAP scroll-triggered animation
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg || hasAnimated.current) return;
+
+    const fallback = setTimeout(() => {
+      if (!hasAnimated.current) {
+        setAnimationProgress(1);
+        hasAnimated.current = true;
+      }
+    }, 2000);
 
     async function initGSAP() {
       const { gsap } = await import("gsap");
@@ -43,26 +46,18 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
       gsap.registerPlugin(ScrollTrigger);
 
       const proxy = { progress: 0 };
-
       gsap.to(proxy, {
         progress: 1,
         duration: 1.2,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: svg,
-          start: "top 80%",
-          once: true,
-        },
-        onUpdate: () => {
-          setAnimationProgress(proxy.progress);
-        },
-        onComplete: () => {
-          hasAnimated.current = true;
-        },
+        scrollTrigger: { trigger: svg, start: "top 90%", once: true },
+        onUpdate: () => setAnimationProgress(proxy.progress),
+        onComplete: () => { hasAnimated.current = true; clearTimeout(fallback); },
       });
     }
-
     initGSAP();
+
+    return () => clearTimeout(fallback);
   }, []);
 
   const margin = { top: 40, right: 20, bottom: 50, left: 20 };
@@ -91,51 +86,37 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
           {data.map((d) => {
             const color = QUANT_COLORS[d.quant as QuantLevel] ?? "#888";
             const colorDark = QUANT_COLORS_DARK[d.quant as QuantLevel] ?? "#555";
+            const colorLight = QUANT_COLORS_LIGHT[d.quant as QuantLevel] ?? color;
             return (
-              <linearGradient
-                key={d.quant}
-                id={`bar-gradient-${d.quant}`}
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop offset="0%" stopColor={color} stopOpacity={1} />
-                <stop offset="100%" stopColor={colorDark} stopOpacity={0.85} />
+              <linearGradient key={d.quant} id={`bar-gradient-${d.quant}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={colorLight} stopOpacity={1} />
+                <stop offset="40%" stopColor={color} stopOpacity={1} />
+                <stop offset="100%" stopColor={colorDark} stopOpacity={0.9} />
               </linearGradient>
             );
           })}
+          <filter id="main-bar-shadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.3" />
+          </filter>
         </defs>
 
         <g transform={`translate(${margin.left},${margin.top})`}>
-          {/* Grid lines */}
           {[20, 40, 60, 80, 100].map((tick) => (
-            <line
-              key={tick}
-              x1={0}
-              x2={innerWidth}
-              y1={yScale(tick)}
-              y2={yScale(tick)}
-              stroke="var(--border)"
-              strokeOpacity={0.2}
-              strokeDasharray="4,4"
-            />
+            <line key={tick} x1={0} x2={innerWidth} y1={yScale(tick)} y2={yScale(tick)} stroke="var(--border)" strokeOpacity={0.2} strokeDasharray="4,4" />
           ))}
 
-          {/* Bars */}
           {data.map((d, i) => {
             const barWidth = xScale.bandwidth();
             const barX = xScale(d.quant) ?? 0;
             const fullHeight = innerHeight - yScale(d.retention);
-
-            // Stagger: each bar starts a bit later
             const staggerDelay = i * 0.06;
             const localProgress = Math.max(
               0,
-              Math.min(1, (animationProgress - staggerDelay) / (1 - staggerDelay * data.length / (data.length - 1)))
+              Math.min(1, (animationProgress - staggerDelay) / Math.max(0.01, 1 - staggerDelay))
             );
             const staggeredHeight = fullHeight * localProgress;
             const staggeredY = innerHeight - staggeredHeight;
+            const lightColor = QUANT_COLORS_LIGHT[d.quant as QuantLevel] ?? "#888";
 
             return (
               <g key={d.quant}>
@@ -145,7 +126,8 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
                   width={barWidth}
                   height={staggeredHeight}
                   fill={`url(#bar-gradient-${d.quant})`}
-                  rx={4}
+                  rx={6}
+                  filter="url(#main-bar-shadow)"
                   className="cursor-pointer transition-opacity duration-150"
                   opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.5 : 1}
                   onMouseEnter={(e) => {
@@ -161,7 +143,21 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
                   }}
                   onMouseLeave={() => setHoveredIndex(null)}
                 />
-                {/* Percentage label above bar */}
+                {/* Inner highlight */}
+                {staggeredHeight > 2 && (
+                  <rect
+                    x={barX + 0.5}
+                    y={staggeredY + 0.5}
+                    width={Math.max(0, barWidth - 1)}
+                    height={Math.max(0, staggeredHeight - 1)}
+                    fill="none"
+                    stroke={lightColor}
+                    strokeOpacity={0.25}
+                    strokeWidth={0.5}
+                    rx={6}
+                    pointerEvents="none"
+                  />
+                )}
                 {localProgress > 0.5 && (
                   <text
                     x={barX + barWidth / 2}
@@ -175,14 +171,13 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
                     {formatPercent(d.retention)}
                   </text>
                 )}
-                {/* Quant label below */}
                 <text
                   x={barX + barWidth / 2}
                   y={innerHeight + 20}
                   textAnchor="middle"
                   fill="var(--text-secondary)"
                   fontSize={11}
-                  fontFamily="var(--font-geist-sans)"
+                  fontFamily="var(--font-geist-mono)"
                 >
                   {d.quant}
                 </text>
@@ -192,7 +187,6 @@ export function OverallRetentionBar({ data }: OverallRetentionBarProps) {
         </g>
       </svg>
 
-      {/* Tooltip */}
       {hoveredIndex !== null && (
         <div
           className="chart-tooltip"

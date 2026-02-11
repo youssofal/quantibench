@@ -69,6 +69,21 @@ RECOMMENDATION: <one line summary of what to do next>
 6. ✅ Responsive at 1440px, 1024px, 768px, 375px
 7. ✅ No console errors
 
+### STRICT VERIFICATION (YOU FAILED THIS LAST TIME):
+**Last run you marked items [x] without actually implementing them.** This is unacceptable.
+
+Before marking ANY item [x]:
+- **Read the component file** to confirm it has REAL implementation (not empty/stub)
+- **Read the page file** to confirm the component is actually imported and rendered
+- **Run `npm run build`** to confirm it compiles
+
+Specifically verify these EXIST and RENDER (they were missing last run):
+- `/models` page MUST show a grid of 5 clickable model cards (ModelCard component)
+- `/models/[slug]` MUST show a data table with 11 columns (DataTable component)
+- `/models/[slug]` MUST show export JSON/CSV buttons (ExportButtons component)
+
+**If a component file exists but returns null, an empty div, or has no real JSX — it is NOT done.**
+
 ### Do NOT:
 - ❌ Add features not in SPEC.md
 - ❌ Use Recharts or any chart wrapper library
@@ -78,3 +93,5 @@ RECOMMENDATION: <one line summary of what to do next>
 - ❌ Skip the metallic gradient fills on chart bars
 - ❌ Use `any` types in TypeScript
 - ❌ Leave placeholder/TODO code
+- ❌ Mark items [x] without verifying the code actually works
+- ❌ Set EXIT_SIGNAL: true without running `npm run build` first

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { scaleLinear } from "d3-scale";
-import { QUANT_COLORS, type QuantLevel } from "@/lib/constants";
+import { QUANT_COLORS, QUANT_ORDER, type QuantLevel } from "@/lib/constants";
 import { formatPercent, formatSpeed, formatVram } from "@/lib/utils";
 
 interface ScatterPoint {
@@ -41,6 +41,13 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
     const svg = svgRef.current;
     if (!svg || hasAnimated.current) return;
 
+    const fallback = setTimeout(() => {
+      if (!hasAnimated.current) {
+        setAnimationProgress(1);
+        hasAnimated.current = true;
+      }
+    }, 2000);
+
     async function initGSAP() {
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
@@ -51,17 +58,14 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
         progress: 1,
         duration: 1.4,
         ease: "back.out(1.2)",
-        scrollTrigger: {
-          trigger: svg,
-          start: "top 80%",
-          once: true,
-        },
+        scrollTrigger: { trigger: svg, start: "top 90%", once: true },
         onUpdate: () => setAnimationProgress(proxy.progress),
-        onComplete: () => { hasAnimated.current = true; },
+        onComplete: () => { hasAnimated.current = true; clearTimeout(fallback); },
       });
     }
-
     initGSAP();
+
+    return () => clearTimeout(fallback);
   }, []);
 
   const margin = { top: 20, right: 30, bottom: 50, left: 60 };
@@ -84,6 +88,9 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
   const xScale = scaleLinear().domain(retentionExtent).range([0, innerWidth]);
   const yScale = scaleLinear().domain(speedExtent).range([innerHeight, 0]);
   const radiusScale = scaleLinear().domain(vramExtent).range([5, 18]);
+
+  // Get unique quant levels present in data
+  const uniqueQuants = QUANT_ORDER.filter((q) => data.some((d) => d.quant === q));
 
   const handleMouseEnter = useCallback(
     (i: number, e: React.MouseEvent<SVGCircleElement>) => {
@@ -129,6 +136,7 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
                 textAnchor="middle"
                 fill="var(--text-muted)"
                 fontSize={11}
+                fontFamily="var(--font-geist-mono)"
               >
                 {tick}%
               </text>
@@ -153,6 +161,7 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
                 textAnchor="end"
                 fill="var(--text-muted)"
                 fontSize={11}
+                fontFamily="var(--font-geist-mono)"
               >
                 {tick.toFixed(0)}
               </text>
@@ -187,20 +196,18 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
             const cy = yScale(d.decodeToksPerSec);
             const r = radiusScale(d.vramGb);
 
-            // Staggered pop-in
             const staggerDelay = i * 0.02;
             const localProgress = Math.max(
               0,
               Math.min(1, (animationProgress - staggerDelay) / Math.max(0.01, 1 - staggerDelay))
             );
-            const scale = localProgress;
 
             return (
               <circle
                 key={`${d.modelName}-${d.quant}`}
                 cx={cx}
                 cy={cy}
-                r={r * scale}
+                r={r * localProgress}
                 fill={color}
                 fillOpacity={hoveredIndex !== null && hoveredIndex !== i ? 0.3 : 0.75}
                 stroke={hoveredIndex === i ? color : "transparent"}
@@ -213,6 +220,19 @@ export function SpeedQualityScatter({ data }: SpeedQualityScatterProps) {
           })}
         </g>
       </svg>
+
+      {/* Color Legend */}
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3">
+        {uniqueQuants.map((q) => (
+          <div key={q} className="flex items-center gap-1.5">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: QUANT_COLORS[q] }}
+            />
+            <span className="text-xs font-mono text-text-muted">{q}</span>
+          </div>
+        ))}
+      </div>
 
       {/* Tooltip */}
       {hoveredIndex !== null && (

@@ -33,7 +33,6 @@ export default function ModelsPage() {
     );
   }
 
-  // Overall model performance data (grouped bars)
   const rankingData = results.map((model) => ({
     modelName: model.name,
     quants: model.quants.map((q) => ({
@@ -42,7 +41,6 @@ export default function ModelsPage() {
     })),
   }));
 
-  // Quant-specific rankings
   const quantSpecific = (quant: string) =>
     results
       .map((model) => {
@@ -54,7 +52,6 @@ export default function ModelsPage() {
       })
       .filter((d) => d.retention > 0);
 
-  // Model cards data
   const modelCards = results.map((model) => {
     const q4 = model.quants.find((q) => q.quant === "Q4_K_M");
     return {
@@ -70,76 +67,74 @@ export default function ModelsPage() {
   });
 
   return (
-    <div className="mx-auto max-w-7xl px-6">
+    <div>
       {/* FP16 Rankings */}
-      <SectionReveal>
-        <section className="py-16 pt-24">
-          <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-2">
-            Model Performance
-          </h1>
-          <p className="text-text-muted mb-8">
-            Models ranked by overall benchmark performance across all quantization levels.
-          </p>
-          <ModelRankingBars
-            data={rankingData}
-            title="Model Performance at FP16"
-            description="All models with all quant levels shown as grouped bars"
-          />
-        </section>
-      </SectionReveal>
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionReveal>
+          <section className="py-16 pt-24">
+            <h1 className="section-heading text-3xl md:text-4xl font-bold text-text-primary mb-2">
+              Model Performance
+            </h1>
+            <p className="text-text-muted mb-8 pl-4">
+              Models ranked by overall benchmark performance across all quantization levels.
+            </p>
+            <div className="glass-card p-6 md:p-8">
+              <ModelRankingBars
+                data={rankingData}
+                title="Model Performance at FP16"
+                description="All models with all quant levels shown as grouped bars"
+              />
+            </div>
+          </section>
+        </SectionReveal>
+      </div>
+
+      <div className="section-divider" />
 
       {/* Quant-Specific 2x2 Grid */}
-      <SectionReveal>
-        <section className="py-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-2">
-            Quant-Specific Rankings
-          </h2>
-          <p className="text-text-muted mb-8">
-            Which models hold up best at each quantization level? Rankings can differ significantly.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <QuantRankingBars
-              data={quantSpecific("Q8_0")}
-              quant="Q8_0"
-              title="Q8_0 Retention"
-            />
-            <QuantRankingBars
-              data={quantSpecific("Q4_K_M")}
-              quant="Q4_K_M"
-              title="Q4_K_M Retention"
-            />
-            <QuantRankingBars
-              data={quantSpecific("IQ2_XXS")}
-              quant="IQ2_XXS"
-              title="IQ2_XXS Retention"
-            />
-            <QuantRankingBars
-              data={quantSpecific("IQ1_S")}
-              quant="IQ1_S"
-              title="IQ1_S Retention"
-            />
-          </div>
-        </section>
-      </SectionReveal>
+      <div className="section-alt">
+        <div className="mx-auto max-w-7xl px-6 relative">
+          <SectionReveal>
+            <section className="py-16">
+              <h2 className="section-heading text-2xl md:text-3xl font-bold text-text-primary mb-2">
+                Quant-Specific Rankings
+              </h2>
+              <p className="text-text-muted mb-8 pl-4">
+                Which models hold up best at each quantization level? Rankings can differ significantly.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <QuantRankingBars data={quantSpecific("Q8_0")} quant="Q8_0" title="Q8_0 Retention" />
+                <QuantRankingBars data={quantSpecific("Q4_K_M")} quant="Q4_K_M" title="Q4_K_M Retention" />
+                <QuantRankingBars data={quantSpecific("IQ2_XXS")} quant="IQ2_XXS" title="IQ2_XXS Retention" />
+                <QuantRankingBars data={quantSpecific("IQ1_S")} quant="IQ1_S" title="IQ1_S Retention" />
+              </div>
+            </section>
+          </SectionReveal>
+        </div>
+      </div>
+
+      <div className="section-divider" />
 
       {/* Model Cards Grid */}
-      <SectionReveal>
-        <section className="py-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-2">
-            Explore Models
-          </h2>
-          <p className="text-text-muted mb-8">
-            Click any model to see full benchmarks, retention curves, and speed data.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {modelCards.map((card, i) => (
-              <SectionReveal key={card.slug} delay={i * 0.06}>
-                <ModelCard {...card} />
-              </SectionReveal>
-            ))}
-          </div>
-        </section>
-      </SectionReveal>
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionReveal>
+          <section className="py-16">
+            <h2 className="section-heading text-2xl md:text-3xl font-bold text-text-primary mb-2">
+              Explore Models
+            </h2>
+            <p className="text-text-muted mb-8 pl-4">
+              Click any model to see full benchmarks, retention curves, and speed data.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {modelCards.map((card, i) => (
+                <SectionReveal key={card.slug} delay={i * 0.06}>
+                  <ModelCard {...card} />
+                </SectionReveal>
+              ))}
+            </div>
+          </section>
+        </SectionReveal>
+      </div>
     </div>
   );
 }
