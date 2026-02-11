@@ -1,0 +1,20 @@
+# QuantiBench V2 — Ralph Configuration
+
+# Model: Opus 4.6 with max extended thinking
+export ANTHROPIC_MODEL="claude-opus-4-6"
+export CLAUDE_CODE_EFFORT_LEVEL="high"
+
+# Tools: broad permissions for Next.js project build
+ALLOWED_TOOLS="Write,Read,Edit,Bash(npm *),Bash(npx *),Bash(node *),Bash(tsx *),Bash(git *),Bash(cat *),Bash(ls *),Bash(mkdir *),Bash(cp *),Bash(mv *),Bash(rm *),Bash(echo *),Bash(find *),Bash(head *),Bash(tail *),Bash(grep *),Bash(sed *),Bash(wc *)"
+
+# Timeout: 30 minutes per loop (complex build tasks)
+CLAUDE_TIMEOUT_MINUTES=30
+
+# Rate limiting: 50 calls/hour (each loop is expensive with Opus)
+MAX_CALLS_PER_HOUR=50
+
+# Session continuity: keep context across loops
+CLAUDE_USE_CONTINUE=true
+
+# JSON output format for structured status parsing
+CLAUDE_OUTPUT_FORMAT=json
