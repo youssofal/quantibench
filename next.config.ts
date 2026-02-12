@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/quantibench",
-  images: {
-    unoptimized: true,
-  },
+  // For GitHub Pages deployment: uncomment basePath + output
+  // output: "export",
+  // basePath: "/quantibench",
+  // images: { unoptimized: true },
 };
 
 export default nextConfig;
