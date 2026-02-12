@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://youssofal.github.io/quantibench/sitemap.xml
