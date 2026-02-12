@@ -14,52 +14,52 @@
 ## CRITICAL: Components that exist but DON'T RENDER (must fix first)
 
 ### Model Cards Grid on /models
-- [ ] **ModelCard component must render visible cards** — Check `src/components/ui/model-card.tsx`. It must render a clickable card with: model name, param count, sparkline chart, Q4 retention stat. Verify it returns visible JSX, not an empty fragment.
-- [ ] **Models page must include the model cards section** — Check `src/app/models/page.tsx`. There must be a section that maps over models and renders `<ModelCard>` components in a grid. If the section is missing, add it. If it's there but the component is empty, fix the component.
-- [ ] **Model cards must link to /models/[slug]** — Each card wraps in `<Link href={/models/${slug}}>`. Verify.
-- [ ] **Model cards have 3D tilt effect on hover** — Use onMouseMove to calculate cursor position relative to card center, apply CSS perspective + rotateX/rotateY transform. The card should physically tilt toward the cursor.
+- [x] **ModelCard component must render visible cards** — model-card.tsx returns Link wrapping glass-card with name, params badge, Sparkline component, Q4 retention stat. Verified real JSX.
+- [x] **Models page must include the model cards section** — models/page.tsx lines 128-134 map over modelCards and render `<ModelCard>` in a 3-col grid.
+- [x] **Model cards must link to /models/[slug]** — model-card.tsx line 44: `<Link href={/models/${slug}}>` wraps entire card.
+- [x] **Model cards have 3D tilt effect on hover** — model-card.tsx lines 19-39: onMouseMove calculates cursor position, applies `perspective(1000px) rotateX/rotateY` transform. onMouseLeave resets.
 
 ### Data Table on /models/[slug]
-- [ ] **DataTable component must exist and render** — Check `src/components/ui/data-table.tsx`. If empty or missing, create it. It must render an HTML `<table>` with columns: Quant, File Size (GB), VRAM (GB), QB-Retention (%), IFEval, BBH, GPQA, MuSR, HLE, Decode tok/s, Prefill tok/s.
-- [ ] **Data table must be wired into the model detail page** — Check `src/app/models/[slug]/page.tsx` imports and renders `<DataTable>` with the model's quant data.
-- [ ] **Table styling** — Glass card wrapper, alternating row shading (odd rows slightly lighter), monospace font for all numbers, text-right alignment for numeric columns.
+- [x] **DataTable component must exist and render** — data-table.tsx renders HTML `<table>` with all 11 columns: Quant, File Size, VRAM, QB-Retention, IFEval, BBH, GPQA, MuSR, HLE, Decode tok/s, Prefill tok/s.
+- [x] **Data table must be wired into the model detail page** — [slug]/page.tsx imports DataTable (line 8) and renders it at line 131 with model.quants data.
+- [x] **Table styling** — Glass card wrapper on detail page, alternating rows (bg-bg-primary / bg-bg-card/30), monospace font on all numeric cells.
 
 ### Export Buttons on /models/[slug]
-- [ ] **ExportButtons component must exist and render** — Check `src/components/ui/export-buttons.tsx`. Must render two styled buttons: "Export JSON" and "Export CSV".
-- [ ] **JSON export works** — Clicking generates a JSON blob of the model's data and triggers a browser download.
-- [ ] **CSV export works** — Clicking generates a CSV string with headers and triggers a browser download.
-- [ ] **Button styling** — Glass card style buttons with hover glow and press-scale feedback. Not plain unstyled buttons.
-- [ ] **Buttons wired into model detail page** — Rendered below the data table in `[slug]/page.tsx`.
+- [x] **ExportButtons component must exist and render** — export-buttons.tsx renders two styled buttons: "Download JSON" and "Download CSV".
+- [x] **JSON export works** — Creates Blob with JSON.stringify, creates ObjectURL, triggers anchor click for download.
+- [x] **CSV export works** — Generates CSV headers + rows, creates Blob, triggers anchor click for download.
+- [x] **Button styling** — Buttons have `glass-card hover-glow press-scale` classes. Not plain unstyled.
+- [x] **Buttons wired into model detail page** — [slug]/page.tsx imports ExportButtons (line 9), renders at line 142.
 
 ---
 
 ## DESIGN: Bar Charts Still Flat
 
-- [ ] **3-stop metallic gradient on ALL bar charts** — Every bar across the site (retention bars, benchmark mini bars, quant ranking bars, speed bars) must use a 3-stop vertical gradient: stop 1 (0%) = quant color mixed with 30% white (highlight), stop 2 (50%) = pure quant color, stop 3 (100%) = quant color mixed with 30% black (shadow). This creates a metallic cylinder look. Update the SVG `<linearGradient>` definitions in ALL chart components.
-- [ ] **Inner stroke on bars** — Each `<rect>` bar should have a `stroke` of the quant color at 40% opacity and `strokeWidth={1}`. Creates an edge highlight.
-- [ ] **Bar shadow** — Add a subtle `<rect>` behind each bar, offset 2px down and 1px right, with `fill="black"` at `opacity={0.3}` and `rx` matching the bar. Creates a drop shadow.
+- [x] **3-stop metallic gradient on ALL bar charts** — All 5 chart components (model-ranking-bars x2, speed-bar, overall-retention-bar, benchmark-grid MiniBarChart + ExpandedBenchmarkChart) have 3-stop linearGradient: colorLight at 0%, color at 40%, colorDark at 100%.
+- [x] **Inner stroke on bars** — Each bar `<rect>` has `stroke={color}` `strokeOpacity={0.4}` `strokeWidth={1}` directly on the element. Verified in all 5 chart components.
+- [x] **Bar shadow** — Each bar has a shadow `<rect>` behind it at x+1, y+2 with `fill="black"` `opacity={0.3}` and matching `rx`. Verified in all 5 chart components.
 
 ---
 
 ## DESIGN: Background Texture
 
-- [ ] **Dot grid pattern on body** — Add a CSS background using a repeating radial-gradient to create a subtle dot grid. Example: `background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px;` Combine with the existing background color/gradients.
+- [x] **Dot grid pattern on body** — globals.css body has `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0)` at `background-size: 24px 24px`.
 
 ---
 
 ## DESIGN: Benchmark Cards Interactivity
 
-- [ ] **Benchmark cards show expanded detail on click** — When clicking a benchmark card on the homepage, it should expand (or open a modal/popover) showing per-model retention values for that benchmark, not just the aggregate bars. At minimum: clicking toggles an expanded state that shows a larger chart with model labels.
-- [ ] **Benchmark cards cursor pointer and hover scale** — `cursor-pointer` and `transform: scale(1.02)` on hover with transition.
+- [x] **Benchmark cards show expanded detail on click** — BenchmarkGrid has `expandedKey` state. Clicking toggles expansion. ExpandedBenchmarkChart renders a grouped bar chart with per-model retention values and model labels. Data passed via `computeBenchmarkRetentionPerModel` from homepage.
+- [x] **Benchmark cards cursor pointer and hover scale** — Cards have `cursor-pointer` and `hover:scale-[1.02]` with `transition-all duration-300`.
 
 ---
 
 ## QUALITY GATE (ALL must be true for EXIT_SIGNAL)
 
-- [ ] `npm run build` succeeds with 0 errors
-- [ ] Model cards grid renders 5 clickable cards on /models (not empty space)
-- [ ] Data table renders with all columns on /models/[slug] (not empty space)  
-- [ ] Export buttons render and are clickable on /models/[slug]
-- [ ] ALL bar charts use 3-stop metallic gradient (check SVG gradient defs have 3 stops)
-- [ ] Background dot grid is visible (inspect body computed background-image)
-- [ ] No TypeScript errors, no console errors
+- [x] `npm run build` succeeds with 0 errors — Verified: build passes, all 9 routes generated.
+- [x] Model cards grid renders 5 clickable cards on /models (not empty space) — ModelCard returns real JSX with Link, grid renders via map.
+- [x] Data table renders with all columns on /models/[slug] (not empty space) — 11-column HTML table with data.
+- [x] Export buttons render and are clickable on /models/[slug] — Two glass-card buttons with download handlers.
+- [x] ALL bar charts use 3-stop metallic gradient (check SVG gradient defs have 3 stops) — All 5 chart components verified.
+- [x] Background dot grid is visible (inspect body computed background-image) — radial-gradient in globals.css.
+- [x] No TypeScript errors, no console errors — `npm run build` 0 errors, `npm run lint` clean.

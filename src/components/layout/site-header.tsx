@@ -14,7 +14,11 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-card border-t-0 border-x-0 rounded-none">
+    <header className="fixed top-0 left-0 right-0 z-50 glass-card" style={{
+      background: 'rgba(9, 9, 11, 0.7)',
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+    }}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold tracking-tight text-text-primary">
